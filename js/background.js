@@ -1,5 +1,6 @@
-function Background(game, player) {
+function Background(game) {
   this.game = game;
+  this.plPosition = this.game.player.vx
 
   this.img = new Image();
   this.img.src = 'img/bg.png';
@@ -17,7 +18,8 @@ Background.prototype.draw = function() {
   };
 
 Background.prototype.move = function() {
-  this.x -= this.dx;
+  this.x -= this.plPosition;
+  console.log(this.plPosition)
 
   if (this.x < -this.game.canvas.width) this.x = 0;
 };

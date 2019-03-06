@@ -12,19 +12,18 @@ Game.prototype.clear = function() {
   this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 }; 
 
-Game.prototype.start2 = function(){
+Game.prototype.start = function(){
   this.clear();
   this.moveAll();
   this.draw();
-  window.requestAnimationFrame(this.start2.bind(this));
-
+  window.requestAnimationFrame(this.start.bind(this));
 }
 
 
 Game.prototype.reset = function() {
+  this.player = new Pj(this);
   this.background = new Background(this);
- // this.player = new Player(this);
-  this.framesCounter = 0;
+  //this.framesCounter = 0;
   //this.obstacles = [];
  // this.score = 0;
 };
@@ -33,14 +32,14 @@ Game.prototype.reset = function() {
 
 Game.prototype.draw = function() {
   this.background.draw();
-  //this.player.draw();
+  this.player.draw();
  // this.obstacles.forEach(function(obstacle) { obstacle.draw(); });
   //this.drawScore();  
 };
 
 Game.prototype.moveAll = function() {
-  console.log(this.background)
   this.background.move();
-  //this.player.move();
+  this.player.move();
+  this.player.jump();
   //this.obstacles.forEach(function(obstacle) { obstacle.move(); });
 };
