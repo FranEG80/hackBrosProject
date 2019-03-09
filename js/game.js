@@ -4,6 +4,7 @@ function Game(canvadId) {
   this.canvas.width = 1280;
   this.canvas.height = 720;
 
+  this.vBg = 0;
 
   this.reset();
 }
@@ -21,8 +22,9 @@ Game.prototype.start = function(){
 
 
 Game.prototype.reset = function() {
-  this.player = new Pj(this);
-  this.background = new Background(this);
+  this.player = new Pj(this, 'blue', 0);
+  this.player2 = new Pj(this, 'red', 1);
+  this.background = new Background(this, this.player);
   //this.framesCounter = 0;
   //this.obstacles = [];
  // this.score = 0;
@@ -33,13 +35,13 @@ Game.prototype.reset = function() {
 Game.prototype.draw = function() {
   this.background.draw();
   this.player.draw();
+  this.player2.draw();
  // this.obstacles.forEach(function(obstacle) { obstacle.draw(); });
   //this.drawScore();  
 };
 
 Game.prototype.moveAll = function() {
   this.background.move();
-  this.player.move();
-  this.player.jump();
   //this.obstacles.forEach(function(obstacle) { obstacle.move(); });
 };
+
