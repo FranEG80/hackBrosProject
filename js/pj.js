@@ -6,23 +6,27 @@ function Pj(game, color, pl){
   this.pl = pl;
   
   this.x = 20 + this.pl * 80;
-  this.width = 50;
-  this.height= 84;
-  this.yIni = this.game.canvas.height - 200;
+  this.width = 60;
+  this.height= 120;
+  this.yIni = this.game.floor - this.height;
   this.y = this.yIni;
   this.suelo = this.yIni;
 
+  this.gravity = 0.4;
   this.vy = 0;
   this.vx = 0;
-  
+
 }
 
 Pj.prototype.draw = function () {
   this.ctx.fillStyle = this.color;
 
-  this.gravity = 0.4;
   Collision(this.game.player, this.game.player2);
-// error bg movimiento aqui
+  Collision(this.game.player2, this.game.player);
+
+  this.game.obstacle.collision(this)
+  
+
   this.x += this.vx;
   if (this.x <= 0) {
     this.x = 0;
@@ -55,5 +59,5 @@ Pj.prototype.stopMove = function() {
 }
 
 Pj.prototype.jump = function() {
-  (this.y >= this.yIni) ? this.vy = -10 : null;
+  (this.y >= this.yIni) ? this.vy = -(8 + this.pl * 3) : null;
 }
