@@ -15,7 +15,7 @@ function Obstacle(game) {
   this.width = 50 * Math.floor(Math.random()*8 );
   this.height = 50;
 
-  this.x = 300
+  this.x = 900
   this.y = this.game.floor - elementAleatory(this.position);
 }
 

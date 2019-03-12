@@ -10,7 +10,8 @@ window.onload = function() {
     //case 86: game.player.shoot(); break;
     case 104: game.player2.jump(); break;
     case 100: game.player2.moveLeft(); break;
-    case 102: game.player2.moveRight(); break;
+    case 102: game.player2.moveRight();
+    game.player2.count ++; break;
     //case 80: game.player2.shoot(); break;
    }
  }

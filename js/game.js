@@ -18,6 +18,14 @@ Game.prototype.start = function(){
   this.clear();
   this.moveAll();
   this.draw();
+
+  this.framesCounter++;
+
+  // controlamos que frameCounter no sea superior a 1000
+  if (this.framesCounter > 1000) {
+    this.framesCounter = 0;
+  }
+
   window.requestAnimationFrame(this.start.bind(this));
 }
 
@@ -27,7 +35,7 @@ Game.prototype.reset = function() {
   this.player = new Pj(this, 'blue', 0);
   this.player2 = new Pj(this, 'red', 1);
   this.background = new Background(this, this.player);
-  //this.framesCounter = 0;
+  this.framesCounter = 0;
   //this.obstacles = [];
  // this.score = 0;
 };
