@@ -18,6 +18,8 @@ Background.prototype.draw = function() {
 Background.prototype.move = function() {
   this.vx = this.game.vBg;
   
+  if (this.game.running == false) this.x -= 5;
+
   this.x -= this.vx;
   if (this.x < -this.game.canvas.width) this.x = 0;
 };

@@ -12,7 +12,7 @@ function Pj(game, color, pl){
   this.y = this.yIni;
   this.suelo = this.yIni;
 
-  this.count = 0;
+  this.count = 1;
 
   this.gravity = 0.4;
   this.vy = 0;

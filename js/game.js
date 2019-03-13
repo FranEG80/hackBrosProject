@@ -7,6 +7,8 @@ function Game(canvadId) {
 
   this.vBg = 0;
 
+  this.running = false;
+
   this.reset();
 }
 
