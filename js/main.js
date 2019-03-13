@@ -26,3 +26,14 @@ window.onload = function() {
 
  }
 };
+
+function abre(){
+  var header = document.querySelector('.header');
+  var bottom = document.querySelector('.bottom');
+  var content = document.querySelector('.content');
+
+  header.className += ' header2';
+  bottom.className += ' bottom2';
+  content.className += ' content2';
+
+}

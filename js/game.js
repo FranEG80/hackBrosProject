@@ -7,7 +7,7 @@ function Game(canvadId) {
 
   this.vBg = 0;
 
-  this.running = false;
+  this.running = true;
 
   this.reset();
 }
@@ -48,13 +48,15 @@ Game.prototype.draw = function() {
   this.background.draw();
   this.player.draw();
   this.player2.draw();
-  this.obstacle.draw();
+ //  this.obstacle.draw();
+  this.obstacle.obs();
  // this.obstacles.forEach(function(obstacle) { obstacle.draw(); });
   //this.drawScore();  
 };
 
 Game.prototype.moveAll = function() {
   this.background.move();
+  this.obstacle.move()
   //this.obstacles.forEach(function(obstacle) { obstacle.move(); });
 };
 
