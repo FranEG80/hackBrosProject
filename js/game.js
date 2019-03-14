@@ -33,7 +33,7 @@ Game.prototype.start = function(){
 
 
 Game.prototype.reset = function() {
-  //this.obstacle = new Obstacle(this)
+  this.obstacle = new Obstacle(this)
   this.player = new Pj(this, 'blue', 0);
   this.player2 = new Pj(this, 'red', 1);
   this.background = new Background(this, this.player);
@@ -42,7 +42,7 @@ Game.prototype.reset = function() {
   this.obstacles = [
     [1285, 0, 1, 1], [1285*2, 0, 1, 1], [1285*4, 1, 1, 1], [1285, 1, 5, 1], 
   ];
-  this.generateObstacle();
+ //this.generateObstacle();
   //this.phase = this.obstacles.forEach(function(obstacle) { new Obstacle(this, obstacle).bind(this)})
  // this.score = 0;
 };
@@ -61,14 +61,14 @@ Game.prototype.draw = function() {
   this.background.draw();
   this.player.draw();
   this.player2.draw();
-  //this.obstacle.obs();
-  this.phase.forEach(function(obstacle) { obstacle.draw(); });
+  this.obstacle.draw();
+  //this.phase.forEach(function(obstacle) { obstacle.draw(); });
   //this.drawScore();  
 };
 
 Game.prototype.moveAll = function() {
   this.background.move();
  // this.obstacle.move()
-  this.phase.forEach(function(obstacle) { obstacle.move(); });
+  //this.phase.forEach(function(obstacle) { obstacle.move(); });
 };
 

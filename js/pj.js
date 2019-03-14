@@ -59,7 +59,9 @@ Pj.prototype.draw = function () {
   Collision(this.game.player, this.game.player2);
   Collision(this.game.player2, this.game.player);
 
-  this.game.phase.forEach(function(obstacle){obstacle.collision(this)});
+  this.game.obstacle.collision(this)
+
+  //this.game.phase.forEach(function(obstacle){obstacle.collision(this)});
   this.limitMove();
   
   if (this.count > 1000) {
