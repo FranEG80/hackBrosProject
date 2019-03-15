@@ -11,7 +11,7 @@ function Obstacle(game, myArray) { // myArray = [posicionX, posicionY, ancho, al
   //this.y = (this.game.floor) - ((this.game.player.height + 10) * myArray[1]) // aqui falla por el game.floor
   this.x = 500
   this.y = 500
-  this.width = 50// * myArray[2]  // * Math.floor(Math.random()*8 );
+  this.width = 100// * myArray[2]  // * Math.floor(Math.random()*8 );
   this.height = 50// * myArray[3]
 
 /*   this.x = 900
@@ -50,21 +50,39 @@ Obstacle.prototype.collision = function (player){
    }*/
   
   /* ESTE ES BUENO */
-  
+  /* 
   if (player.x + player.width > this.x && player.x < this.x + this.width 
     && player.y < this.y + this.height && player.y + player.height > this.y ) {
-      player.vx = -player.vx
-    } else if (player.x + player.width > this.x && player.x < this.x + this.width
-      && player.y + player.height < this.y && player.y < this.y){
-        player.yIni = this.y - player.height -1
-    } //  player.y <= this.y - player.height
+      player.x = this.x - player.width
+    } else if (player.x < this.x + this.width && this.x + this.width < player.x + player.width){
+      player.x = this.x+this.width;
+      player.vx = 0;
+    } */
+    /* (this.player.x + this.player.w) >= obstacle.x &&
+    this.player.x < (obstacle.x + obstacle.w) &&
+    this.player.y + (this.player.h - 20) >= obstacle.y) */
 
 
-   if (player.x + player.width > this.x && player.x < this.x + this.width 
+  if (player.x + player.width > this.x && player.x < this.x + this.width && player.y < this.y + this.height && player.y + player.height > this.y ) {
+    player.vx = -player.vx
+  } 
+  if (player.x + player.width < this.x && player.y + player.height <= this.y) {
+    player.yIni = this.game.floor - player.height
+  }
+      
+  if (player.x + player.width  > this.x && player.x < this.x + this.width && player.y + player.height < this.y && player.y < this.y){
+    player.yIni = this.y - player.height -1
+  } else if (player.x > this.x + this.width && player.y <= this.y - player.height) {
+    player.yIni = this.game.floor - player.height
+  }  
+  
+  if (player.x + player.width > this.x && player.x < this.x + this.width && player.y <
+    
+    /* if (player.x + player.width > this.x && player.x < this.x + this.width 
     && this.y + this.height > player.y ) {
       player.vy = 0;
       player.y = this.y + this.height +1 
-  }
+  } */
   //player.x + player.width > this.x && player.x < this.x + this.width */
  
   

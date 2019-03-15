@@ -24,34 +24,10 @@ function Pj(game, color, pl){
   this.imgRight.frames = 5;
   this.imgRight.frameIndex = 0; 
 
-  this.imagenes();
+  // this.imagenes();
 
 }
 
-Pj.prototype.imagenes = function() {
-
-  this.img0 = new Image();
-  this.img1 = new Image();
-  this.img2 = new Image();
-  this.img3 = new Image();
-  this.imgjump = new Image();
-  this.img0left = new Image();
-  this.img1left = new Image();
-  this.img2left = new Image();
-  this.img3left = new Image();
-  this.imgjumpleft = new Image();
-
-  this.img0.src = "./img/robot0.png"
-  this.img1.src = "./img/robot1.png"
-  this.img2.src = "./img/robot2.png"
-  this.img3.src = "./img/robot3.png"
-  this.imgjump.src = "./img/robotjump.png"
-  this.img0left.src = "./img/robot0left.png"
-  this.img1left.src = "./img/robot1left.png"
-  this.img2left.src = "./img/robot2left.png"
-  this.img3left.src = "./img/robot3left.png"
-  this.imgjumpleft.src = "./img/robotjumpleft.png"  
-}
 
 Pj.prototype.draw = function () {
   this.ctx.fillStyle = this.color;
@@ -122,7 +98,25 @@ Pj.prototype.animateImg = function() {
   }
 };
 
-Pj.prototype.moveImg = function() {
+Pj.prototype.moveRight = function() {
+  this.vx = 5;
+}
+
+Pj.prototype.moveLeft = function(){
+  this.vx = -5;
+}
+
+Pj.prototype.stopMove = function() {
+  this.game.vBg = 0;
+  this.vx = 0;
+}
+
+Pj.prototype.jump = function() {
+  if (this.y >= this.yIni) this.vy = -(8 + this.pl * 3);
+}
+
+
+/* Pj.prototype.moveImg = function() {
   
   if (this.vx == 0 && this.vy == 0 && this.yIni == this.y) {
     this.game.ctx.drawImage(this.img0, this.x, this.y, this.width , this.height);
@@ -147,22 +141,4 @@ Pj.prototype.moveImg = function() {
   } else if (this.y != this.yIni && this.vx < 0) {
     this.game.ctx.drawImage(this.imgjumpleft, this.x, this.y, this.width , this.height);
   }
-} 
-
-Pj.prototype.moveRight = function() {
-  this.vx = 5;
-}
-
-Pj.prototype.moveLeft = function(){
-  this.vx = -5;
-}
-
-Pj.prototype.stopMove = function() {
-  this.game.vBg = 0;
-  this.vx = 0;
-}
-
-Pj.prototype.jump = function() {
-  if (this.y >= this.yIni) this.vy = -(8 + this.pl * 3);
-}
-
+}  */
