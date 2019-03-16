@@ -10,7 +10,6 @@ function Game(canvadId) {
   this.running = true;
 
   this.players = []
-  console.log(this.players)
 
   this.reset();
 }

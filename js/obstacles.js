@@ -11,20 +11,24 @@ function Obstacle(game, myArray) { // myArray = [posicionX, posicionY, ancho, al
   //this.y = (this.game.floor) - ((this.game.player.height + 10) * myArray[1]) // aqui falla por el game.floor
   this.x = 500
   this.y = 500
-  this.width = 100// * myArray[2]  // * Math.floor(Math.random()*8 );
-  this.height = 50// * myArray[3]
+  this.width = 70// * myArray[2]  // * Math.floor(Math.random()*8 );
+  this.height = 70// * myArray[3]
 
+  this.img = new Image();
+  this.img.scr = 'img/piedra.png'
 /*   this.x = 900
   this.y = this.game.floor - elementAleatory(this.position);
  */}
 
 Obstacle.prototype.draw = function() {
-  this.game.ctx.fillRect(this.x, this.y, this.width, this.height )
+ // this.game.ctx.fillRect(this.x, this.y, this.width, this.height )
+  this.game.ctx.drawImage(this.img, 500,500, 70, 70);
 }
+
+// this.game.ctx.drawImage(this.img, this.x, this.y, this.width , this.height);
 
 
 Obstacle.prototype.collision = function (player){
-
 
   if (player.x + player.width > this.x && player.x < this.x + this.width && player.y < this.y + this.height && player.y + player.height > this.y ) {
     player.x += -player.vx
@@ -45,7 +49,6 @@ Obstacle.prototype.collision = function (player){
     player.vy=0;
     player.y= this.y + this.height;
   }
-
 }
 
 Obstacle.prototype.obs = function () {

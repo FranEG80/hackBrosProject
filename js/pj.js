@@ -110,7 +110,7 @@ Pj.prototype.jump = function() {
 
 Pj.prototype.drawScore = function() {
 
-  this.ctx.font = "30px sans-serif";
+  this.ctx.font = "30px Helvetica";
   this.ctx.fillStyle = "black";
   this.ctx.fillText('Player', 50 + this.pl * this.width*2, 50);
   this.ctx.fillText(Math.floor(this.score), 200 + this.pl * this.width*2, 50);
