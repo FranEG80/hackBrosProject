@@ -9,20 +9,20 @@ function Obstacle(game, myArray) { // myArray = [posicionX, posicionY, ancho, al
   
   //this.x = myArray[0]
   //this.y = (this.game.floor) - ((this.game.player.height + 10) * myArray[1]) // aqui falla por el game.floor
+  
+  this.width = 70
+  this.height = 70
   this.x = 500
-  this.y = 500
-  this.width = 70// * myArray[2]  // * Math.floor(Math.random()*8 );
-  this.height = 70// * myArray[3]
+  this.y = this.game.floor - this.height
 
   this.img = new Image();
-  this.img.scr = 'img/piedra.png'
+  this.img.src = 'img/piedra.png';
 /*   this.x = 900
   this.y = this.game.floor - elementAleatory(this.position);
  */}
 
 Obstacle.prototype.draw = function() {
- // this.game.ctx.fillRect(this.x, this.y, this.width, this.height )
-  this.game.ctx.drawImage(this.img, 500,500, 70, 70);
+  this.game.ctx.drawImage(this.img, this.x, this.y, this.width, this.height );
 }
 
 // this.game.ctx.drawImage(this.img, this.x, this.y, this.width , this.height);

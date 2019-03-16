@@ -20,12 +20,11 @@ function Pj(game, color, pl){
   this.vx = 0;
 
   this.imgRight = new Image();
-  this.imgRight.src = './img/robot'+this.pl+'.png'
-  // número de imágenes diferentes
+  this.imgRight.src = './img/robot'+this.pl+'.png';
+
   this.imgRight.frames = 10;
   this.imgRight.frameIndex = 0; 
 
-  //  this.imagenes();
 
 }
 
