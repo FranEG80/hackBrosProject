@@ -12,19 +12,20 @@ function Pj(game, color, pl){
   this.y = this.yIni;
   this.suelo = this.yIni;
 
-  this.count = 1;
+  this.count = 0;
+  this.score = 0;
 
   this.gravity = 0.4;
   this.vy = 0;
   this.vx = 0;
 
   this.imgRight = new Image();
-  this.imgRight.src = './img/robotRight.png'
+  this.imgRight.src = './img/robot'+this.pl+'.png'
   // número de imágenes diferentes
-  this.imgRight.frames = 5;
+  this.imgRight.frames = 10;
   this.imgRight.frameIndex = 0; 
 
-  // this.imagenes();
+  //  this.imagenes();
 
 }
 
@@ -32,27 +33,18 @@ function Pj(game, color, pl){
 Pj.prototype.draw = function () {
   this.ctx.fillStyle = this.color;
 
-  Collision(this.game.player, this.game.player2);
-  Collision(this.game.player2, this.game.player);
-
   this.game.obstacle.collision(this)
+
+  this.x += this.vx;
+  this.y += this.vy;
 
   //this.game.phase.forEach(function(obstacle){obstacle.collision(this)});
   this.limitMove();
-  
-  if (this.count > 1000) {
-    this.count = 0;
-  }
+  this.drawScore();
 
+  this.dibuja();
+  this.moveImg();
 
-  if (this.pl == 0) {
-    this.ctx.fillRect(this.x, this.y, this.width, this.height )
-  } else {
-    
-    this.dibuja();
-    this.animateImg();
-   
-  } 
 }
 
 Pj.prototype.dibuja = function() {
@@ -67,19 +59,20 @@ Pj.prototype.dibuja = function() {
     this.width,
     this.height 
   )
+  this.count ++;
 }
 
 Pj.prototype.limitMove = function() {
   
-  this.x += this.vx;
   if (this.x <= 0) {
     this.x = 0;
   } else if (this.x > 720) {
     this.game.vBg = 5;
     this.x = 720;
+    this.score += 0.2;
+
   }
 
-  this.y += this.vy;
   if (this.y >= this.yIni) {
     this.vy = 0;
     this.y = this.yIni;
@@ -94,7 +87,7 @@ Pj.prototype.animateImg = function() {
     this.imgRight.frameIndex += 1;
 
     // Si el frame es el último, se vuelve al primero
-    if (this.imgRight.frameIndex > 2) this.imgRight.frameIndex = 0;
+    if (this.imgRight.frameIndex > 3  ) this.imgRight.frameIndex = 0;
   }
 };
 
@@ -115,30 +108,61 @@ Pj.prototype.jump = function() {
   if (this.y >= this.yIni) this.vy = -(8 + this.pl * 3);
 }
 
+Pj.prototype.drawScore = function() {
 
-/* Pj.prototype.moveImg = function() {
-  
-  if (this.vx == 0 && this.vy == 0 && this.yIni == this.y) {
-    this.game.ctx.drawImage(this.img0, this.x, this.y, this.width , this.height);
-  } else if (this.vx > 0 && this.vy == 0 && this.yIni == this.y && this.count >0 && this.count <=10) {
-    this.game.ctx.drawImage(this.img1, this.x, this.y, this.width , this.height);
+  this.ctx.font = "30px sans-serif";
+  this.ctx.fillStyle = "black";
+  this.ctx.fillText('Player', 50 + this.pl * this.width*2, 50);
+  this.ctx.fillText(Math.floor(this.score), 200 + this.pl * this.width*2, 50);
+
+}
+
+ Pj.prototype.moveImg = function() {
+  if (this.vx >= 0 && this.vy != 0){
+    this.imgRight.frameIndex = 3
+  } else if (this.vx <= 0 && this.vy != 0) {
+    this.imgRight.frameIndex = 5
+  } else if (this.vx == 0 && this.vy == 0 && this.yIni == this.y) {
+    this.imgRight.frameIndex = 0
+  } else if (this.vx > 0 && this.vy == 0 && this.yIni == this.y && this.count >0 && this.count <=05) {
+    this.imgRight.frameIndex = 1
   } else if (this.vx > 0 && this.vy == 0 && this.yIni == this.y && this.count >10 && this.count <=20) {
-    this.game.ctx.drawImage(this.img1, this.x, this.y, this.width , this.height);
+    this.imgRight.frameIndex = 2
   } else if (this.vx > 0 && this.vy == 0 && this.yIni == this.y && this.count >20 && this.count <=30) {
-    this.game.ctx.drawImage(this.img2, this.x, this.y, this.width , this.height);
-  } else if (this.vx > 0 && this.vy == 0 && this.yIni == this.y && this.count >30 && this.count <= 40) {
-    this.game.ctx.drawImage(this.img0, this.x, this.y, this.width , this.height);
-  }else if (this.vx > 0 && this.vy == 0 && this.yIni == this.y && this.count >40) {
+    this.imgRight.frameIndex = 3
+  } else if (this.vx > 0 && this.vy == 0 && this.yIni == this.y && this.count >30 && this.count <=40) {
+    this.imgRight.frameIndex = 0
+  } else if (this.vx > 0 && this.vy == 0 && this.yIni == this.y && this.count >40 ) {
     this.count=0;
-  } else if (this.y != this.yIni && (this.vx > 0 || this.vx == 0)) {
-    this.game.ctx.drawImage(this.imgjump, this.x, this.y, this.width , this.height);
-  } else if (this.vx < 0 && this.vy == 0 && this.yIni == this.y && this.count % 10) {
-    this.game.ctx.drawImage(this.img3left, this.x, this.y, this.width , this.height);
-  } else if (this.vx < 0 && this.vy == 0 && this.yIni == this.y && this.count % 20) {
-    this.game.ctx.drawImage(this.img2left, this.x, this.y, this.width , this.height);
-  } else if (this.vx < 0 && this.vy == 0 && this.yIni == this.y && this.count % 30) {
-    this.game.ctx.drawImage(this.img1left, this.x, this.y, this.width , this.height);
-  } else if (this.y != this.yIni && this.vx < 0) {
-    this.game.ctx.drawImage(this.imgjumpleft, this.x, this.y, this.width , this.height);
+  } else if (this.vx == 0 && this.vy == 0 && this.yIni == this.y) {
+    this.imgRight.frameIndex = 9
+  } else if (this.vx < 0 && this.vy == 0 && this.yIni == this.y && this.count >0 && this.count <=05) {
+    this.imgRight.frameIndex = 8
+  } else if (this.vx < 0 && this.vy == 0 && this.yIni == this.y && this.count >10 && this.count <=20) {
+    this.imgRight.frameIndex = 7
+  } else if (this.vx < 0 && this.vy == 0 && this.yIni == this.y && this.count >20 && this.count <=30) {
+    this.imgRight.frameIndex = 6
+  } else if (this.vx < 0 && this.vy == 0 && this.yIni == this.y && this.count >30 && this.count <=40) {
+    this.imgRight.frameIndex = 9
+  } else if (this.vx < 0 && this.vy == 0 && this.yIni == this.y && this.count >40 ) {
+    this.count=0;
+  } 
+  
+
+} 
+
+
+Pj.prototype.collision = function (player){
+
+  if (this.x  > player.x && this.x < player.y + player.width &&
+    this.y + this.height < player.y) {
+      this.yIni = player.y - player.height
+    }
+  if (this.x + this.width > player.x && this.x < player.x && player.y < this.y + this.height && player.y + player.height > this.y) {
+    this.x = player.x - this.width
   }
-}  */
+  if (this.x < player.x + player.width && this.x + this.width > player.x + player.width && player.y < this.y + this.height && player.y + player.height > this.y) {
+    this.x = player.x + player.width
+  }
+ 
+}

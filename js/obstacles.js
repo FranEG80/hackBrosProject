@@ -25,48 +25,12 @@ Obstacle.prototype.draw = function() {
 
 Obstacle.prototype.collision = function (player){
 
-  /* este es malo a mejorar con el bueno
-
-  if (player.x + player.width > this.x && player.x < this.x 
-    && player.y < this.y + this.height && player.y + player.height > this.y ) {
-      player.vx = 0;
-      player.x = this.x - player.width
-    } else if (player.x + player.width > this.x && player.x < this.x + this.width
-      && player.y + player.height < this.y && player.y < this.y){
-        player.yIni = this.y - player.height -1
-    } 
-  if (player.x < this.x + this.width && player.x > this.x 
-      && player.y < this.y + this.height && player.y + player.height > this.y ) {
-        player.x = this.x+this.width
-      } else if (player.x + player.width > this.x && player.x < this.x + this.width
-        && player.y + player.height < this.y && player.y < this.y){
-          player.yIni = this.y - player.height -1
-      } //  player.y <= this.y - player.height
-
-
-   if (player.x + player.width > this.x && player.x < this.x + this.width && this.y + this.height > player.y ) {
-      player.vy = 0;
-      player.y = this.y + this.height 
-   }*/
-  
-  /* ESTE ES BUENO */
-  /* 
-  if (player.x + player.width > this.x && player.x < this.x + this.width 
-    && player.y < this.y + this.height && player.y + player.height > this.y ) {
-      player.x = this.x - player.width
-    } else if (player.x < this.x + this.width && this.x + this.width < player.x + player.width){
-      player.x = this.x+this.width;
-      player.vx = 0;
-    } */
-    /* (this.player.x + this.player.w) >= obstacle.x &&
-    this.player.x < (obstacle.x + obstacle.w) &&
-    this.player.y + (this.player.h - 20) >= obstacle.y) */
-
 
   if (player.x + player.width > this.x && player.x < this.x + this.width && player.y < this.y + this.height && player.y + player.height > this.y ) {
-    player.vx = -player.vx
-  } 
-  if (player.x + player.width < this.x && player.y + player.height <= this.y) {
+    player.x += -player.vx
+    player.vx = 0;
+
+  }  else if (player.x + player.width < this.x && player.y + player.height <= this.y) {
     player.yIni = this.game.floor - player.height
   }
       
@@ -76,16 +40,12 @@ Obstacle.prototype.collision = function (player){
     player.yIni = this.game.floor - player.height
   }  
   
-  if (player.x + player.width > this.x && player.x < this.x + this.width && player.y <
-    
-    /* if (player.x + player.width > this.x && player.x < this.x + this.width 
-    && this.y + this.height > player.y ) {
-      player.vy = 0;
-      player.y = this.y + this.height +1 
-  } */
-  //player.x + player.width > this.x && player.x < this.x + this.width */
- 
-  
+  if (player.x + player.width  > this.x && player.x < this.x + this.width && 
+    player.y < this.y + this.height && player.y + player.height > this.y) {
+    player.vy=0;
+    player.y= this.y + this.height;
+  }
+
 }
 
 Obstacle.prototype.obs = function () {

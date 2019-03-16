@@ -9,6 +9,9 @@ function Game(canvadId) {
 
   this.running = true;
 
+  this.players = []
+  console.log(this.players)
+
   this.reset();
 }
 
@@ -23,7 +26,6 @@ Game.prototype.start = function(){
 
   this.framesCounter++;
 
-  // controlamos que frameCounter no sea superior a 1000
   if (this.framesCounter > 1000) {
     this.framesCounter = 0;
   }
@@ -33,9 +35,13 @@ Game.prototype.start = function(){
 
 
 Game.prototype.reset = function() {
+  
   this.obstacle = new Obstacle(this)
   this.player = new Pj(this, 'blue', 0);
+  this.players.push(this.player)
   this.player2 = new Pj(this, 'red', 1);
+  this.players.push(this.player2)
+
   this.background = new Background(this, this.player);
   this.framesCounter = 0;
   this.phase = []
@@ -44,7 +50,7 @@ Game.prototype.reset = function() {
   ];
  //this.generateObstacle();
   //this.phase = this.obstacles.forEach(function(obstacle) { new Obstacle(this, obstacle).bind(this)})
- // this.score = 0;
+ 
 };
 
 
@@ -59,11 +65,16 @@ Game.prototype.generateObstacle = function() {
 
 Game.prototype.draw = function() {
   this.background.draw();
-  this.player.draw();
-  this.player2.draw();
+  for (i=0; i<2; i++) {
+    this.players[i].draw();
+    if(i=== 0){
+      this.players[i].collision(this.players[1])
+    } else if (i===1) {
+      this.players[i].collision(this.players[0])
+    }
+  }
   this.obstacle.draw();
   //this.phase.forEach(function(obstacle) { obstacle.draw(); });
-  //this.drawScore();  
 };
 
 Game.prototype.moveAll = function() {
