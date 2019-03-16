@@ -35,7 +35,7 @@ Game.prototype.start = function(){
 
 Game.prototype.reset = function() {
   
-  this.obstacle = new Obstacle(this, 140, 500)
+  this.obstacle = new Obstacle(this, 70, 500)
   this.obstacle2 = new Obstacle(this, 140, 800)
   this.obstacle3 = new Obstacle(this, 140, 1250)
   this.obstacle4 = new Obstacle(this, 70, 1250)
