@@ -33,11 +33,16 @@ Pj.prototype.draw = function () {
   this.ctx.fillStyle = this.color;
 
   this.game.obstacle.collision(this)
+  this.game.obstacle2.collision(this)
+  this.game.obstacle3.collision(this)
+  this.game.obstacle4.collision(this)
+  this.game.obstacle5.collision(this)
+  this.game.obstacle6.collision(this)
+  this.game.obstacle7.collision(this)
 
   this.x += this.vx;
   this.y += this.vy;
 
-  //this.game.phase.forEach(function(obstacle){obstacle.collision(this)});
   this.limitMove();
   this.drawScore();
 

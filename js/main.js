@@ -34,5 +34,6 @@ function abre(){
   header.className += ' header2';
   bottom.className += ' bottom2';
   content.className += ' content2';
+  bottom.setAttribute = 'hidden'
 
 }

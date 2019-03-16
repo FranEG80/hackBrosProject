@@ -1,31 +1,26 @@
 
-/* 
-function elementAleatory(myArray) {
-  return myArray[Math.floor(Math.random()* myArray.length)];
-} */
-
-function Obstacle(game, myArray) { // myArray = [posicionX, posicionY, ancho, alto]
+function Obstacle(game, h, d) { // myArray = [posicionX, posicionY, ancho, alto]
   this.game = game;
   
-  //this.x = myArray[0]
-  //this.y = (this.game.floor) - ((this.game.player.height + 10) * myArray[1]) // aqui falla por el game.floor
-  
+  this.movile = true;
+
   this.width = 70
-  this.height = 70
-  this.x = 500
+  this.height = h
+  this.x = d
   this.y = this.game.floor - this.height
 
   this.img = new Image();
-  this.img.src = 'img/piedra.png';
-/*   this.x = 900
-  this.y = this.game.floor - elementAleatory(this.position);
- */}
+  this.img.src = 'img/piedra.png';}
 
 Obstacle.prototype.draw = function() {
-  this.game.ctx.drawImage(this.img, this.x, this.y, this.width, this.height );
+  if (this.height == 70) {
+    this.game.ctx.drawImage(this.img, this.x, this.y, this.width, this.height );
+  } else if (this.height == 140) {
+    this.game.ctx.drawImage(this.img, this.x, this.y, this.width, this.height/2 )
+    this.game.ctx.drawImage(this.img, this.x, this.y+70, this.width, this.height/2 )
+  };
 }
 
-// this.game.ctx.drawImage(this.img, this.x, this.y, this.width , this.height);
 
 
 Obstacle.prototype.collision = function (player){
@@ -50,21 +45,6 @@ Obstacle.prototype.collision = function (player){
     player.y= this.y + this.height;
   }
 }
-
-Obstacle.prototype.obs = function () {
-      this.h0 = this.game.floor - this.height;
-      this.positionX = [1285, 1285+300, 1285+(300*2), 1285+300*3, 1285+300*4, 1285+300*5, 1285+300*600, 1285+300*7, 1285+300*8, 1285+300*9]
-
-      this.hPlayer = this.game.player.height - 20;
-      this.positionY = [this.h0, this.h0-this.hplayer, this.h0-(this.hplayer*2)]
-      
-      this.game.ctx.fillRect(this.positionX[0], this.h0, this.width, this.height);
-      this.game.ctx.fillRect(this.positionX[1], this.h0, this.width, this.height);
-
-      this.game.ctx.fillRect(this.positionX[2], 450, this.width*1, (this.game.floor - 450));
-      this.game.ctx.fillRect(this.positionX[2]+50, 450, this.width*2, this.height*1);
-}
-
 Obstacle.prototype.move = function() {
   this.vx = this.game.vBg;
   this.x -= this.vx;
